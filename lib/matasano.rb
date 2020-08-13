@@ -76,3 +76,142 @@ module Matasano
   def pad_blocks_to_size(arr, length, fill=0)
     arr.map{|sub_arr| sub_arr.dup.fill(fill, sub_arr.length..length-1)}
   end
+
+  def encrypt_xor(plain_bytes, key_bytes)
+    xor_bytes(
+      plain_bytes,
+      full_key(
+        key_bytes,
+        plain_bytes.length))
+  end
+
+  def decrypt_xor(cipher_bytes, key)
+    Matasano::bytes_to_str(
+      Matasano::xor_bytes(
+        cipher_bytes,
+        Matasano.full_key(
+          key,
+          cipher_bytes.length)))
+  end
+
+  def strip_non_printable(str)
+    str.gsub(/[^[:print:]]/, '')
+  end
+
+  def brute_xor(cipher_bytes, num_candidates=10)
+    (0..255).map {|char|
+      [char, Matasano.decrypt_xor(cipher_bytes, [char])]
+    }
+    .map{|char, plain| [char, strip_non_printable(plain)]}
+    .reject{|_, plain| plain.empty?}
+    .sort_by{|_, plain| freq_score(plain)}
+    .take(num_candidates)
+  end
+
+  def ham(a,b)
+    v = (a ^ b)
+    c = 0
+    while v > 0
+      c += v & 1
+      v >>= 1
+    end
+    c
+  end
+
+  def ham_sandwich(byte_ar1, byte_ar2)
+    byte_ar1
+      .zip(byte_ar2)
+      .map{|pair| ham(pair[0], pair[1])}
+  end
+
+  def hamming_distance(byte_ar1, byte_ar2)
+    ham_sandwich(byte_ar1, byte_ar2).reduce(:+)
+  end
+
+  def hamming_difference(chunk_size, bytes, samples = 2)
+    chunk_1 = bytes[0...chunk_size]
+
+    bytes[chunk_size..-1]
+      .each_slice(chunk_size)
+      .take(samples)
+      .map {|chunk_2| Matasano::hamming_distance(chunk_1, chunk_2)/chunk_size.to_f }
+      .reduce(:+) / samples
+  end
+
+  def decrypt_aes_128_ecb(bytes, key)
+    data = bytes_to_str(pad_pkcs7_to_multiple(bytes, 16))
+    cipher = OpenSSL::Cipher.new('AES-128-ECB')
+    cipher.decrypt
+    cipher.padding = 0
+    cipher.key = key
+    unpad_pkcs7(str_to_bytes(cipher.update(data) + cipher.final), 16)
+  end
+
+  def encrypt_aes_128_ecb(bytes, key)
+    data = bytes_to_str(pad_pkcs7_to_multiple(bytes, 16))
+    cipher = OpenSSL::Cipher.new('AES-128-ECB')
+    cipher.encrypt
+    cipher.padding = 0
+    cipher.key = key
+    str_to_bytes(cipher.update(data) + cipher.final)
+  end
+
+  def unpad_pkcs7(bytes, size)
+    last_byte = bytes[-1]
+    pad = bytes[-last_byte..-1]
+    if pad && pad.all? {|v| v == last_byte }
+      bytes[0...-last_byte]
+    else
+      bytes
+    end
+  end
+
+
+  def pad_pkcs7(bytes, size)
+    fill_length = size - bytes.length
+    bytes.dup.fill(fill_length, bytes.length..size-1)
+  end
+
+  def pad_pkcs7_to_multiple(bytes, block_size=16)
+    if bytes.length % block_size != 0
+      block_multiple_length = bytes.length + block_size - (bytes.length % block_size)
+      pad_pkcs7(bytes, block_multiple_length)
+    else
+      bytes
+    end
+  end
+
+  def encrypt_aes_128_cbc(bytes, key, iv=Array.new(16, 0))
+    blocks = bytes.each_slice(16).to_a
+
+    chained = [Matasano.encrypt_aes_128_ecb(Matasano.xor_bytes(blocks.shift, iv), key)]
+
+    blocks.each do |block|
+      chained << Matasano.encrypt_aes_128_ecb(Matasano.xor_bytes(block, chained[-1]), key)
+    end
+
+    chained.flatten
+  end
+
+  def decrypt_aes_128_cbc(bytes, key, iv=Array.new(16, 0))
+    unpad_pkcs7((iv + bytes)
+      .each_slice(16)
+      .each_cons(2)
+      .map do |last, current|
+        Matasano.xor_bytes(Matasano.decrypt_aes_128_ecb(current, key), last)
+      end
+      .flatten, 16)
+  end
+
+  def detect_block_mode
+    enc = yield(Array.new(128, 1))
+    blocks = enc.each_slice(16).to_a
+    repeating_blocks = (blocks.length -  blocks.uniq.length)
+    return repeating_blocks > 0 ? :ecb : :cbc
+  end
+
+  def detect_block_length
+    (2..128).each do |added_bytes|
+      enc_bytes = yield(Array.new(added_bytes, 0))
+      (2..128).each do |window|
+        enc_bytes.each_slice(window).each_cons(2).with_index.each do |(l,r),i|
