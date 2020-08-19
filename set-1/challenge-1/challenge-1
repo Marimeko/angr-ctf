@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'base64'
+require_relative '../../lib/matasano.rb'
+
+def hex_to_base64(hex_str)
+  Base64.strict_encode64

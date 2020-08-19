@@ -215,3 +215,14 @@ module Matasano
       enc_bytes = yield(Array.new(added_bytes, 0))
       (2..128).each do |window|
         enc_bytes.each_slice(window).each_cons(2).with_index.each do |(l,r),i|
+          if l == r
+            fill_bytes = added_bytes - (window * 2)
+            prefix_size = window*i - fill_bytes
+            return prefix_size, fill_bytes, window
+          end
+        end
+      end
+    end
+    raise "Couldn't determine block length"
+  end
+end
