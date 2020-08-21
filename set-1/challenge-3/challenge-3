@@ -3,4 +3,9 @@ require_relative '../../lib/matasano'
 
 if ARGV.length < 1
   puts "Ex. ./challenge-3 1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
-  exit
+  exit 1
+end
+
+#Check every single character xor, return top n candidates that are printable, sorted by freq score
+Matasano::brute_xor(
+  Matasano::hex_st
