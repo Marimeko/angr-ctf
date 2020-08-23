@@ -12,4 +12,7 @@ Matasano::brute_xor(
   .each
   .with_index(1) do |(candidate, plaintext), i|
     puts ["#{i.to_s.rjust(2)}.",
-        "Key: '#{candidate.chr}
+        "Key: '#{candidate.chr}'",
+        "(Score: #{Matasano::freq_score(plaintext).round(4)})",
+        "Plaintext: #{plaintext}"].join(" ")
+  end
