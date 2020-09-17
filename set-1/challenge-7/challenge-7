@@ -1,0 +1,10 @@
+
+#!/usr/bin/env ruby
+
+require 'base64'
+require_relative '../../lib/matasano'
+
+puts Matasano.bytes_to_str(
+  Matasano.decrypt_aes_128_ecb(
+    Matasano.str_to_bytes(Base64.decode64(ARGF.read)),
+    "YELLOW SUBMARINE"))
