@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require '../../lib/matasano'
+require 'securerandom'
+require 'base64'
+
+RANDO
