@@ -5,4 +5,7 @@ require 'securerandom'
 require 'base64'
 
 RANDOM_KEY = SecureRandom.random_bytes(16)
-MYSTERY_STRING = Base64.decode64("Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg\naGFpciBjYW4gYmxvd
+MYSTERY_STRING = Base64.decode64("Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg\naGFpciBjYW4gYmxvdwpUaGUgZ2lybGllcyBvbiBzdGFuZGJ5IHdhdmluZyBq\ndXN0IHRvIHNheSBoaQpEaWQgeW91IHN0b3A/IE5vLCBJIGp1c3QgZHJvdmUg\nYnkK\n")
+
+def oracle(plain_bytes)
+  plain_mysterious 
