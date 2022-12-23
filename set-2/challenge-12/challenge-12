@@ -13,4 +13,9 @@ def oracle(plain_bytes)
 end
 
 
-def decrypt_char(block_size, co
+def decrypt_char(block_size, confirmed, current_window)
+  dict = {}
+
+  prefix = Array.new(block_size,0)[0..(-2-current_window.length)]
+  (0...256).each do |char_byte|
+    test = prefix 
