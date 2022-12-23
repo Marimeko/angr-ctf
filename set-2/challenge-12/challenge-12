@@ -8,4 +8,9 @@ RANDOM_KEY = SecureRandom.random_bytes(16)
 MYSTERY_STRING = Base64.decode64("Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg\naGFpciBjYW4gYmxvdwpUaGUgZ2lybGllcyBvbiBzdGFuZGJ5IHdhdmluZyBq\ndXN0IHRvIHNheSBoaQpEaWQgeW91IHN0b3A/IE5vLCBJIGp1c3QgZHJvdmUg\nYnkK\n")
 
 def oracle(plain_bytes)
-  plain_mysterious 
+  plain_mysterious = plain_bytes + Matasano.str_to_bytes(MYSTERY_STRING)
+  Matasano.encrypt_aes_128_ecb(plain_mysterious, RANDOM_KEY)
+end
+
+
+def decrypt_char(block_size, co
