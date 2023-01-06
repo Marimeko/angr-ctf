@@ -38,4 +38,10 @@ def decrypt_string
     puts "Decrypting block #{i}"
     current_block = []
     block_size.times do
-      chr = decryp
+      chr = decrypt_char(block_size, decrypted_string, current_block)
+      break if chr.nil?
+      current_block << chr
+    end
+    decrypted_string += current_block
+  end
+  decrypted
