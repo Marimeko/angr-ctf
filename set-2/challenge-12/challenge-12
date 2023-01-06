@@ -34,4 +34,8 @@ def decrypt_string
 
   decrypted_string = []
 
-  (mys
+  (mystery_length/block_size).times do |i|
+    puts "Decrypting block #{i}"
+    current_block = []
+    block_size.times do
+      chr = decryp
