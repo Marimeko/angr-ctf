@@ -44,4 +44,12 @@ def decrypt_string
     end
     decrypted_string += current_block
   end
-  decrypted
+  decrypted_string.flatten.map(&:chr).join
+end
+
+decrypted = decrypt_string
+
+puts
+puts "Decrypted String:"
+puts
+puts decrypted
