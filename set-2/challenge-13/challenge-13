@@ -32,3 +32,7 @@ def decrypt_profile(enc)
       enc,
       RANDOM_KEY)))
 end
+
+part_1 = encrypted_profile_for("foooo@bar.com")
+part_2 = encrypted_profile_for("foooooooooadmin\v\v\v\v\v\v\v\v\v\v\v@bar.com")
+puts decrypt_profile(part_1[0...32] + part_2[16...32])
