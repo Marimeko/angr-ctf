@@ -12,3 +12,8 @@ def oracle(plain_bytes)
   plain_mysterious = Matasano.str_to_bytes(RANDOM_PREFIX) +
                      plain_bytes +
                      Matasano.str_to_bytes(MYSTERY_STRING)
+  Matasano.encrypt_aes_128_ecb(plain_mysterious, RANDOM_KEY)
+end
+
+
+def decrypt_char(leading_size, leading_fill_size, block_size, confirmed, cur
