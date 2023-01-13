@@ -4,4 +4,6 @@ require '../../lib/matasano'
 require 'securerandom'
 require 'base64'
 
-RANDOM_PREFIX = SecureRandom.rand
+RANDOM_PREFIX = SecureRandom.random_bytes(10)
+RANDOM_KEY = SecureRandom.random_bytes(16)
+MYSTERY_STRING = Base64.decode64("Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg\naGFp
