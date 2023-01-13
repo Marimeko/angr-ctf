@@ -26,4 +26,10 @@ def decrypt_char(leading_size, leading_fill_size, block_size, confirmed, current
     dict[test_enc] = char_byte
   end
   enc = oracle(prefix)
-  dict[enc[leading_size+leading_fill_size,block_size+
+  dict[enc[leading_size+leading_fill_size,block_size+confirmed.length]]
+end
+
+
+def decrypt_string
+  block_mode = Matasano.detect_block_mode { |bytes| oracle(bytes) }
+  leading_size, leading_fill_size, block_si
