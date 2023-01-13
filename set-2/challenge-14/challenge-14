@@ -6,4 +6,6 @@ require 'base64'
 
 RANDOM_PREFIX = SecureRandom.random_bytes(10)
 RANDOM_KEY = SecureRandom.random_bytes(16)
-MYSTERY_STRING = Base64.decode64("Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg\naGFp
+MYSTERY_STRING = Base64.decode64("Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg\naGFpciBjYW4gYmxvdwpUaGUgZ2lybGllcyBvbiBzdGFuZGJ5IHdhdmluZyBq\ndXN0IHRvIHNheSBoaQpEaWQgeW91IHN0b3A/IE5vLCBJIGp1c3QgZHJvdmUg\nYnkK\n")
+
+def oracle(plain_bytes
