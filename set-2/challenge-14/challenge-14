@@ -22,4 +22,8 @@ def decrypt_char(leading_size, leading_fill_size, block_size, confirmed, current
            Array.new(block_size - current_window.length-1,0)
   (0...256).each do |char_byte|
     test = prefix + confirmed + current_window + [char_byte]
-    test_enc = oracle(test)[leading_size+leading_
+    test_enc = oracle(test)[leading_size+leading_fill_size, block_size+confirmed.length]
+    dict[test_enc] = char_byte
+  end
+  enc = oracle(prefix)
+  dict[enc[leading_size+leading_fill_size,block_size+
