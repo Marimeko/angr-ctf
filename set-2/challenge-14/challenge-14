@@ -37,4 +37,8 @@ def decrypt_string
 
   decrypted_string = []
 
-  (mystery_len
+  (mystery_length/block_size).times do |i|
+    puts "Decrypting block #{i}"
+    current_block = []
+    block_size.times do |i|
+      chr = decrypt_char(lea
