@@ -45,4 +45,12 @@ def decrypt_string
       break if chr.nil?
       current_block << chr
     end
- 
+    decrypted_string += current_block
+  end
+  decrypted_string.flatten.map(&:chr).join
+end
+
+decrypted = decrypt_string
+
+puts
+puts "Decrypted S
