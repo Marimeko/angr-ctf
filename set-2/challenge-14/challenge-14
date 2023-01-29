@@ -41,4 +41,8 @@ def decrypt_string
     puts "Decrypting block #{i}"
     current_block = []
     block_size.times do |i|
-      chr = decrypt_char(lea
+      chr = decrypt_char(leading_size, leading_fill_size, block_size, decrypted_string, current_block)
+      break if chr.nil?
+      current_block << chr
+    end
+ 
