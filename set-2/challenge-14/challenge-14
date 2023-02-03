@@ -53,4 +53,6 @@ end
 decrypted = decrypt_string
 
 puts
-puts "Decrypted S
+puts "Decrypted String:"
+puts
+puts decrypted
