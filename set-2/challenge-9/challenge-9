@@ -3,4 +3,10 @@
 require_relative '../../lib/matasano'
 
 if ARGV.length > 0
-  puts Matasano.bytes_to_
+  puts Matasano.bytes_to_str(
+  Matasano.pad_pkcs7(
+    Matasano.str_to_bytes(ARGV[0]),
+    20)).inspect
+else
+  puts "e.x. ./challenge-9 \"YELLOW SUBMARINE\""
+end
