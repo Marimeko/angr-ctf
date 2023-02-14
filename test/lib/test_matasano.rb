@@ -23,4 +23,7 @@ class TestMatasano < Minitest::Test
   end
 
   def test_xor_bytes
-    a = bin_strs_to_bytes(["00001110", "00000001", "00001111"]
+    a = bin_strs_to_bytes(["00001110", "00000001", "00001111"])
+    b = bin_strs_to_bytes(["00000101", "00000010", "00001111"])
+
+    assert_equal bin_strs_to_bytes(["00001011", "00000011", "00000000"]), Matasano.xor_bytes(a, b)
