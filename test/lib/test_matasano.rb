@@ -19,4 +19,8 @@ class TestMatasano < Minitest::Test
   end
 
   def test_bytes_to_hex_str
-    assert_equal "ff010a", Mata
+    assert_equal "ff010a", Matasano.bytes_to_hex_str([255, 1, 10])
+  end
+
+  def test_xor_bytes
+    a = bin_strs_to_bytes(["00001110", "00000001", "00001111"]
