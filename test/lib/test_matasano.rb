@@ -27,3 +27,11 @@ class TestMatasano < Minitest::Test
     b = bin_strs_to_bytes(["00000101", "00000010", "00001111"])
 
     assert_equal bin_strs_to_bytes(["00001011", "00000011", "00000000"]), Matasano.xor_bytes(a, b)
+  end
+
+  def test_freq_score
+    assert_equal 1.146014456463636, Matasano.freq_score("hello world")
+  end
+
+  def test_letter_freq
+    assert_
