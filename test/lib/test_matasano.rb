@@ -38,4 +38,9 @@ class TestMatasano < Minitest::Test
   end
 
   def test_full_key
-    key = bin_strs_to_bytes(["01010101", "0011001
+    key = bin_strs_to_bytes(["01010101", "00110011"])
+    full_key = bin_strs_to_bytes(["01010101","00110011","01010101","00110011", "01010101"])
+    assert_equal full_key, Matasano.full_key(key, 5)
+  end
+
+  def test_pad_
