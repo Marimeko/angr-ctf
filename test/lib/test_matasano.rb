@@ -34,4 +34,8 @@ class TestMatasano < Minitest::Test
   end
 
   def test_letter_freq
-    assert_
+    assert_equal 0.5, Matasano.letter_freq("a", "abababab")
+  end
+
+  def test_full_key
+    key = bin_strs_to_bytes(["01010101", "0011001
