@@ -43,4 +43,7 @@ class TestMatasano < Minitest::Test
     assert_equal full_key, Matasano.full_key(key, 5)
   end
 
-  def test_pad_
+  def test_pad_blocks_to_size
+    arr = [[1,2,3,4], [1,2,3], [1]]
+    assert_equal [[1,2,3,4], [1,2,3,0], [1,0,0,0]], Matasano.pad_blocks_to_size(arr, 4, 0)
+  end
