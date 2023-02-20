@@ -47,3 +47,7 @@ class TestMatasano < Minitest::Test
     arr = [[1,2,3,4], [1,2,3], [1]]
     assert_equal [[1,2,3,4], [1,2,3,0], [1,0,0,0]], Matasano.pad_blocks_to_size(arr, 4, 0)
   end
+
+  def test_encrypt_xor
+    plain_text = bin_strs_to_bytes(["11001100", "01111111", "00000000", "11000011"])
+    key = bin_strs_to_bytes(["1
