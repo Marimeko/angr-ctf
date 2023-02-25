@@ -50,4 +50,6 @@ class TestMatasano < Minitest::Test
 
   def test_encrypt_xor
     plain_text = bin_strs_to_bytes(["11001100", "01111111", "00000000", "11000011"])
-    key = bin_strs_to_bytes(["1
+    key = bin_strs_to_bytes(["11001100", "11111111"])
+    cipher_bytes = bin_strs_to_bytes(["00000000", "10000000", "11001100", "00111100"])
+    assert_equal cipher_bytes
