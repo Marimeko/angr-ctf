@@ -68,4 +68,9 @@ class TestMatasano < Minitest::Test
   end
 
   def test_brute_xor
-    plaintext = "hello
+    plaintext = "hello world this is a test of the brute xor function"
+    plain_bytes = Matasano.str_to_bytes(plaintext)
+
+    key = Matasano.str_to_bytes("Q")
+
+    enciphered = 
