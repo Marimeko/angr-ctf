@@ -61,3 +61,11 @@ class TestMatasano < Minitest::Test
     cipher_bytes = Matasano.encrypt_xor(Matasano.str_to_bytes(plaintext), key)
 
     assert_equal "hello world", Matasano.decrypt_xor(cipher_bytes, key)
+  end
+
+  def test_strip_non_printable
+    assert_equal "Z", Matasano.strip_non_printable("\x5Z")
+  end
+
+  def test_brute_xor
+    plaintext = "hello
