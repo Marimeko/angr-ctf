@@ -57,4 +57,7 @@ class TestMatasano < Minitest::Test
 
   def test_decrypt_xor
     plaintext = "hello world"
-    key = Matasano.str_to_bytes
+    key = Matasano.str_to_bytes("ABC")
+    cipher_bytes = Matasano.encrypt_xor(Matasano.str_to_bytes(plaintext), key)
+
+    assert_equal "hello world", Matasano.decrypt_xor(cipher_bytes, key)
