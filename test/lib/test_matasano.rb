@@ -76,4 +76,11 @@ class TestMatasano < Minitest::Test
     enciphered = Matasano.encrypt_xor(plain_bytes, key)
 
     best_candidate = Matasano.brute_xor(enciphered, 3).first
-    guessed_key, guessed_plaintext = best_candidat
+    guessed_key, guessed_plaintext = best_candidate
+
+    assert_equal guessed_key.chr, "Q"
+    assert_equal guessed_plaintext, plaintext
+  end
+
+  def test_ham
+    assert_equal 5, Matasano.ham(bin_str_to_b
