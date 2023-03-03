@@ -87,4 +87,7 @@ class TestMatasano < Minitest::Test
   end
 
   def test_ham_sandwich
-    a = bin_strs_to_bytes(["00001110", "00000001", 
+    a = bin_strs_to_bytes(["00001110", "00000001", "00001111"])
+    b = bin_strs_to_bytes(["00000101", "00000010", "00001111"])
+    assert_equal [3, 2, 0], Matasano.ham_sandwich(a, b)
+  e
