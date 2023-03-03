@@ -83,4 +83,8 @@ class TestMatasano < Minitest::Test
   end
 
   def test_ham
-    assert_equal 5, Matasano.ham(bin_str_to_b
+    assert_equal 5, Matasano.ham(bin_str_to_byte("00110111"), bin_str_to_byte("01101100"))
+  end
+
+  def test_ham_sandwich
+    a = bin_strs_to_bytes(["00001110", "00000001", 
