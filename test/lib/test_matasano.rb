@@ -73,4 +73,7 @@ class TestMatasano < Minitest::Test
 
     key = Matasano.str_to_bytes("Q")
 
-    enciphered = 
+    enciphered = Matasano.encrypt_xor(plain_bytes, key)
+
+    best_candidate = Matasano.brute_xor(enciphered, 3).first
+    guessed_key, guessed_plaintext = best_candidat
