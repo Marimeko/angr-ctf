@@ -94,4 +94,9 @@ class TestMatasano < Minitest::Test
 
   def test_hamming_distance
     a = bin_strs_to_bytes(["00001110", "00000001", "00001111"])
-    b = bin_strs_to_bytes(["0000010
+    b = bin_strs_to_bytes(["00000101", "00000010", "00001111"])
+    assert_equal 5, Matasano.hamming_distance(a, b)
+  end
+
+  def test_hamming_difference
+    bytes = bin_strs_to_bytes([
