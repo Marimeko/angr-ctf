@@ -113,4 +113,9 @@ class TestMatasano < Minitest::Test
       "00000001", "00001111",
       "00111000", "11110000",
       "10101010", "11111111"])
-    assert_equal 3.5, Matasano.hamming_differ
+    assert_equal 3.5, Matasano.hamming_difference(2, bytes, 3)
+  end
+
+  def test_aes_encrypt_ecb
+    key = ["000102030405060708090a0b0c0d0e0f"].pack("H*")
+    plaintext = Matasano.hex_str_to_bytes("00112233445
