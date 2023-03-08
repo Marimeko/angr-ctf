@@ -104,4 +104,9 @@ class TestMatasano < Minitest::Test
       "00000001", "00001111",
       "00111000", "11110000",
       "10101010", "11111111"])
-    asser
+    assert_equal 3, Matasano.hamming_difference(2, bytes)
+  end
+
+  def test_hamming_difference_with_more_samples
+    bytes = bin_strs_to_bytes([
+      "000000
