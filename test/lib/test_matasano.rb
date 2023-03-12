@@ -121,4 +121,9 @@ class TestMatasano < Minitest::Test
     plaintext = Matasano.hex_str_to_bytes("00112233445566778899aabbccddeeff")
     encrypted = Matasano.encrypt_aes_128_ecb(plaintext, key)
 
-    assert_equal Matasano.hex_str_to_byte
+    assert_equal Matasano.hex_str_to_bytes("69c4e0d86a7b0430d8cdb78070b4c55a"), encrypted
+  end
+
+  def test_aes_decrypt_ecb
+    key = ["000102030405060708090a0b0c0d0e0f"].pack("H*")
+    encr
