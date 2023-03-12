@@ -126,4 +126,5 @@ class TestMatasano < Minitest::Test
 
   def test_aes_decrypt_ecb
     key = ["000102030405060708090a0b0c0d0e0f"].pack("H*")
-    encr
+    encrypted = Matasano.hex_str_to_bytes("69c4e0d86a7b0430d8cdb78070b4c55a")
+    decrypted = Matasano.decrypt_aes_128_ecb(encrypted, ke
