@@ -140,4 +140,10 @@ class TestMatasano < Minitest::Test
       "00000000",
       "00000011",
       "00000011",
-      "00
+      "00000011",])
+
+    assert_equal padded, Matasano.pad_pkcs7(original, 5)
+  end
+
+  def test_pad_pkcs7_to_multiple
+    block_16 = Array.new(16, 1)
