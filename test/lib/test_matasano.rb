@@ -133,4 +133,11 @@ class TestMatasano < Minitest::Test
   end
 
   def test_pad_pkcs7
-    original =
+    original = bin_strs_to_bytes(["00000000", "00000000"])
+
+    padded = bin_strs_to_bytes([
+      "00000000",
+      "00000000",
+      "00000011",
+      "00000011",
+      "00
