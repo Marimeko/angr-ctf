@@ -147,3 +147,8 @@ class TestMatasano < Minitest::Test
 
   def test_pad_pkcs7_to_multiple
     block_16 = Array.new(16, 1)
+    block_15 = Array.new(15, 1)
+    block_30 = Array.new(30, 1)
+    block_2907 = Array.new(2907, 1)
+
+    assert_equal Array.new(16, 1), Matasano
