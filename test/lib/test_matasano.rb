@@ -151,4 +151,6 @@ class TestMatasano < Minitest::Test
     block_30 = Array.new(30, 1)
     block_2907 = Array.new(2907, 1)
 
-    assert_equal Array.new(16, 1), Matasano
+    assert_equal Array.new(16, 1), Matasano.pad_pkcs7_to_multiple(block_16)
+    assert_equal Array.new(16, 1), Matasano.pad_pkcs7_to_multiple(block_15)
+    assert_equal block_30 + Array.new(2, 2), Matasa
