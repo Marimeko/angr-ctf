@@ -157,3 +157,7 @@ class TestMatasano < Minitest::Test
     assert_equal block_2907 + Array.new(5, 5), Matasano.pad_pkcs7_to_multiple(block_2907)
   end
 
+  def test_unpad_pkcs7
+    block_29 = Array.new(29) {rand(8)}
+    block = block_29 + [3, 3, 3]
+    assert_equal block_29, Matasano.unpad_pkcs7(b
