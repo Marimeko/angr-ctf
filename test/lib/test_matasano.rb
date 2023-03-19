@@ -167,3 +167,8 @@ class TestMatasano < Minitest::Test
     block_32 = Array.new(32) {rand(8)}
     assert_equal block_32, Matasano.unpad_pkcs7(block_32, 16)
   end
+
+  def test_encrypt_aes_128_cbc
+    key = "YELLOW SUBMARINE"
+    plaintext = Matasano.str_to_bytes("hello world !!!!")
+    encrypted = Mata
