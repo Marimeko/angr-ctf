@@ -171,4 +171,9 @@ class TestMatasano < Minitest::Test
   def test_encrypt_aes_128_cbc
     key = "YELLOW SUBMARINE"
     plaintext = Matasano.str_to_bytes("hello world !!!!")
-    encrypted = Mata
+    encrypted = Matasano.hex_str_to_bytes("f8b4500ceb8fb7ba2643d4c8d240192c")
+
+    assert_equal encrypted, Matasano.encrypt_aes_128_cbc(plaintext, key)
+  end
+
+  def test_aes_decrypt_cbc
