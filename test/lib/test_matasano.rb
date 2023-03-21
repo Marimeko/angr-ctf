@@ -184,4 +184,8 @@ class TestMatasano < Minitest::Test
     assert_equal plaintext, Matasano.decrypt_aes_128_cbc(encrypted, key)
   end
 
-  def test_detect_block_mode_
+  def test_detect_block_mode_ecb
+    key = SecureRandom.random_bytes(16)
+    guess = Matasano.detect_block_mode do |plain|
+      Matasano.encrypt_aes_128_ecb(plain, key)
+  
