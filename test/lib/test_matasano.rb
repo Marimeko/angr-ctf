@@ -200,4 +200,9 @@ class TestMatasano < Minitest::Test
       Matasano.encrypt_aes_128_cbc(plain, key, iv)
     end
 
-    assert_e
+    assert_equal :cbc, guess
+  end
+
+  def test_detect_block_length
+    key = SecureRandom.random_bytes(16)
+    leading_leng
