@@ -205,4 +205,8 @@ class TestMatasano < Minitest::Test
 
   def test_detect_block_length
     key = SecureRandom.random_bytes(16)
-    leading_leng
+    leading_length, leading_fill, block_length = Matasano.detect_block_length do |plain|
+      Matasano.encrypt_aes_128_ecb(plain, key)
+    end
+
+    assert_equal 0, leading_length
