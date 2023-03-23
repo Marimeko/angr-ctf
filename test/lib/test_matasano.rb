@@ -188,4 +188,11 @@ class TestMatasano < Minitest::Test
     key = SecureRandom.random_bytes(16)
     guess = Matasano.detect_block_mode do |plain|
       Matasano.encrypt_aes_128_ecb(plain, key)
-  
+    end
+
+    assert_equal :ecb, guess
+  end
+
+  def test_detect_block_mode_cbc
+    key = SecureRandom.random_bytes(16)
+    iv = Matasano.str_to_bytes(SecureR
