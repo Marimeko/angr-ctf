@@ -210,3 +210,9 @@ class TestMatasano < Minitest::Test
     end
 
     assert_equal 0, leading_length
+    assert_equal 0, leading_fill
+    assert_equal 16, block_length
+  end
+
+  def test_detect_block_length_with_prefix
+    key = SecureRandom.random_b
