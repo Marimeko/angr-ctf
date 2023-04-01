@@ -223,4 +223,9 @@ class TestMatasano < Minitest::Test
 
     assert_equal 10, leading_length
     assert_equal 6, leading_fill
-    assert_equal 16, block_leng
+    assert_equal 16, block_length
+  end
+
+  def test_detect_block_length_with_large_prefix
+    key = SecureRandom.random_bytes(16)
+    prefix = Matasano.str_to_byte
