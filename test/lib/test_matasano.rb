@@ -228,4 +228,6 @@ class TestMatasano < Minitest::Test
 
   def test_detect_block_length_with_large_prefix
     key = SecureRandom.random_bytes(16)
-    prefix = Matasano.str_to_byte
+    prefix = Matasano.str_to_bytes(SecureRandom.random_bytes(30))
+    leading_length, leading_fill, block_length = Matasano.detect_block_length do |plain|
+      
