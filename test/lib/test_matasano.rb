@@ -235,4 +235,16 @@ class TestMatasano < Minitest::Test
 
     assert_equal 30, leading_length
     assert_equal 2, leading_fill
-    assert_equal 16
+    assert_equal 16, block_length
+  end
+
+  private
+
+  def bin_str_to_byte(str)
+    str.to_i(2)
+  end
+
+  def bin_strs_to_bytes(arr)
+    arr.map{|str| bin_str_to_byte(str)}
+  end
+end
