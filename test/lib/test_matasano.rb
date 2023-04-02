@@ -230,4 +230,9 @@ class TestMatasano < Minitest::Test
     key = SecureRandom.random_bytes(16)
     prefix = Matasano.str_to_bytes(SecureRandom.random_bytes(30))
     leading_length, leading_fill, block_length = Matasano.detect_block_length do |plain|
-      
+      Matasano.encrypt_aes_128_ecb(prefix + plain, key)
+    end
+
+    assert_equal 30, leading_length
+    assert_equal 2, leading_fill
+    assert_equal 16
